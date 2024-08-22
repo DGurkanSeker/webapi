@@ -8,7 +8,5 @@ public interface IUser
     Task UpdateUserAsync(User user);
     Task DeleteUserAsync(Guid id);
     Task<List<User>> GetUserByDateAsync(DateTime date);
-    Task<bool> VerifyUserAsync(string email, string password);
-    Task<User> GetUserByEmailAsync(string email);
-    string GenerateJwtToken(User user);
+   Task<bool> VerifyUserAsync(string email, string password);
 }

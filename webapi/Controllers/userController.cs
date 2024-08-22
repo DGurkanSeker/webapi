@@ -97,27 +97,6 @@ namespace webapi.Controllers
                 return Unauthorized(new { Message = "Geçersiz e-posta veya şifre" });
             }
         }
-        [HttpPost("loginChecker")]
-        public async Task<IActionResult> LoginChecker([FromBody] LoginModel loginModel)
-        {
-            var isVerified = await _userService.VerifyUserAsync(loginModel.Email, loginModel.Password);
-
-            if (isVerified)
-            {
-                var user = await _userService.GetUserByEmailAsync(loginModel.Email); // Add this method to fetch user by email
-                var token = _userService.GenerateJwtToken(user);
-
-                return Ok(new
-                {
-                    Message = "Giriş başarılı",
-                    Token = token
-                });
-            }
-            else
-            {
-                return Unauthorized(new { Message = "Geçersiz e-posta veya şifre" });
-            }
-        }
     }
 
     public class LoginModel
@@ -125,5 +104,4 @@ namespace webapi.Controllers
         public string Email { get; set; }
         public string Password { get; set; }
     }
-
 }
